@@ -64,6 +64,7 @@ function handleKeypress(e) {
     current_card.style.transform = "rotateY(180deg)";
 
     currentColumn++;
+
     if (currentColumn == column) {
       listenerEnable = false;
       currentColumn = 0;
@@ -75,10 +76,11 @@ function handleKeypress(e) {
   }
 }
 
-function checkPos(row) {
+function checkPos(r) {
   let milliseconds = column * transitionTime;
-  let temp_arr = row.querySelectorAll(".card_inner");
+  let temp_arr = r.querySelectorAll(".card_inner");
   let same_letter = 0;
+
   temp_arr.forEach((card, i) => {
     card.style.transitionDelay = transitionTime * i + "ms";
     card.style.transform = "rotateY(540deg)";
@@ -110,6 +112,12 @@ function checkPos(row) {
         switchBtnState();
       }, milliseconds + transitionTime * 2);
     }
+
+    if (currentRow == row) {
+      currentRow -= 1;
+      console.log(currentRow);
+      giveup();
+    }
   }, milliseconds + transitionTime);
 }
 
@@ -136,25 +144,26 @@ start_btn.addEventListener("click", () => {
 
 giveup_btn.addEventListener("click", () => {
   if (game_state_start == true) {
-    game_state_start = false;
-    listenerEnable = false;
-    switchBtnState();
     giveup();
   }
 });
 
 function giveup() {
+  game_state_start = false;
+  listenerEnable = false;
+
   let cards = [...main_container.querySelectorAll(".sub_container")][
     currentRow
   ].querySelectorAll(".card_inner");
 
   cards.forEach((card, i) => {
     card.style.transitionDelay = transitionTime * i + "ms";
-    card.style.transform = "rotateY(540deg)";
+    card.style.transform = "rotateY(1260deg) scale(0.85)";
     setTimeout(() => {
       card.classList.add("give_up");
       card.querySelector(".card_back").innerText =
         word_to_guess[i].toUpperCase();
     }, transitionTime * i + transitionTime);
   });
+  switchBtnState();
 }
