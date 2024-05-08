@@ -1,0 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: sans-serif;
+  outline: none;
+  border: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+h2 {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.main_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: rgb(14, 14, 14);
+  max-width: 90%;
+  height: 550px;
+  padding: 10px;
+  color: whitesmoke;
+  min-width: 300px;
+}
+
+.sub_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 85px;
+}
+
+.sub_container .card {
+  width: 100px;
+  height: 100%;
+  perspective: 1000px;
+  background-color: transparent;
+}
+
+.sub_container .card .card_inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.sub_container .card .rot180 {
+  /***/
+  transform: rotateY(180deg);
+}
+
+.sub_container .card .card_front,
+.sub_container .card .card_back {
+  display: grid;
+  place-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.sub_container .card .card_front {
+  background-color: blue;
+}
+
+.sub_container .card .card_back {
+  transform: rotateY(180deg);
+  background-color: blue;
+}
+
+.sub_container .card .pos_same .card_back {
+  background-color: rgb(0, 186, 0);
+}
+
+.sub_container .card .letter_same .card_back {
+  background-color: rgb(202, 126, 12);
+}
+
+.sub_container .card .not_same .card_back {
+  background-color: rgba(203, 0, 0, 0.926);
+}
+
+.sub_container .card .give_up .card_back {
+  background-color: rgb(255, 161, 47);
+}
+
+.btn_container {
+  margin-top: 20px;
+}
+
+.btn_container button {
+  width: 80px;
+  height: 30px;
+  font-weight: 800;
+  color: rgb(198, 198, 198);
+  margin: 0 20px;
+  background-color: rgb(18, 18, 255);
+  cursor: pointer;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  transition: transform box-shadow 0.3s;
+}
+
+.btn_container button:active {
+  box-shadow: 0 5px #999;
+  transform: translateY(4px);
+}
+
+.btn_container button:disabled {
+  box-shadow: 0 5px #999;
+  transform: translateY(4px);
+  opacity: 0.7;
+  pointer-events: none;
+}
